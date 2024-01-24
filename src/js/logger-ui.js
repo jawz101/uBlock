@@ -474,7 +474,13 @@ const parseLogEntry = function(details) {
     // Cell 1
     if ( details.realm === 'message' ) {
         textContent.push(details.text);
-        entry.textContent = textContent.join('\x1F');
+        if ( details.type ) {
+            textContent.push(details.type);
+        }
+        if ( details.keywords ) {
+            textContent.push(...details.keywords);
+        }
+        entry.textContent = textContent.join('\x1F') + '\x1F';
         return entry;
     }
 

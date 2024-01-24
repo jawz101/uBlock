@@ -23,7 +23,7 @@
 
 /******************************************************************************/
 
-import { broadcastToAll } from './broadcast.js';
+import { broadcast, broadcastToAll } from './broadcast.js';
 
 /******************************************************************************/
 
@@ -73,6 +73,7 @@ const logger = {
             this.enabled = true;
             buffer = [];
             janitorTimer.on(logBufferObsoleteAfter);
+            broadcast({ what: 'loggerEnabled' });
         }
         const out = buffer.slice(0, writePtr);
         writePtr = 0;
